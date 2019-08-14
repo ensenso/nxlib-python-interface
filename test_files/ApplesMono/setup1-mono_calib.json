@@ -1,0 +1,79 @@
+{
+	"Calibration": {
+		"Camera": [
+			[
+				1571.74365234375,
+				0,
+				0
+			],
+			[
+				0,
+				1571.74365234375,
+				0
+			],
+			[
+				629.23602294921875,
+				494.91586303710938,
+				1
+			]
+		],
+		"Distortion": [
+			-0.060783442109823227,
+			0,
+			0,
+			0,
+			0
+		]
+	},
+	"EepromId": 50,
+	"Images": {
+		"Raw": 13042476910.133049,
+		"Rectified": null,
+		"WithOverlay": null
+	},
+	"Link": {
+		"Rotation": {
+			"Angle": 3.1457199784452654,
+			"Axis": [
+				0.003278500070835925,
+				-0.0046070384643149406,
+				0.99998401318914787
+			]
+		},
+		"Target": "Apples",
+		"Translation": [
+			-10.254109382629395,
+			-47.720912933349609,
+			28.920570373535156
+		]
+	},
+	"ModelName": "UI524xCP-C",
+	"Parameters": {
+		"Capture": {
+			"AutoExposure": true,
+			"AutoGain": true,
+			"Binning": 1,
+			"Exposure": 39.632308771929821,
+			"Gain": 1,
+			"GainBoost": false,
+			"HardwareGamma": true,
+			"PixelClock": 24,
+			"TargetBrightness": 128,
+			"TriggerMode": "Software"
+		},
+		"IO": {
+			"Input": false,
+			"Output": false
+		}
+	},
+	"Sensor": {
+		"Size": [
+			1280,
+			1024
+		]
+	},
+	"SerialNumber": "4002895081",
+	"Status": "Open",
+	"Temperature": 54.5,
+	"Type": "Monocular"
+}
