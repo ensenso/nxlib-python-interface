@@ -2,10 +2,10 @@ import os, sys
 from os.path import dirname, join, abspath
 sys.path.insert(0, abspath(join(dirname(__file__), '..')))
 
-from nxlib.nxproxy import NxLib, NxLibItem, NxLibCommand
+from nxlib.nx_proxy import NxLib, NxLibItem, NxLibCommand
 import cv2
 
-from nxlib.nxConstants import Items, Commands, Errors, ApiErrors, Values, ItemTypes
+from nxlib.nx_constants import Items, Commands, Errors, ApiErrors, Values, ItemTypes
 
 if __name__ == "__main__":
     nxLib = NxLib('libNxLib64.so')

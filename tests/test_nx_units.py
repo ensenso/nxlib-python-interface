@@ -2,10 +2,10 @@ import os, sys
 from os.path import dirname, join, abspath
 sys.path.insert(0, abspath(join(dirname(__file__), '..')))
 
-from nxlib.nxproxy import NxLib, NxLibItem
+from nxlib.nx_proxy import NxLib, NxLibItem
 import unittest  # The test framework
 
-from nxlib.nxConstants import Items, Commands, Errors, ApiErrors, Values, ItemTypes
+from nxlib.nx_constants import Items, Commands, Errors, ApiErrors, Values, ItemTypes
 
 
 class Test_TestIs(unittest.TestCase):

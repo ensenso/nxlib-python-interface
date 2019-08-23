@@ -3,11 +3,11 @@ import os, sys
 from os.path import dirname, join, abspath
 sys.path.insert(0, abspath(join(dirname(__file__), '..')))
 
-from nxlib.nxproxy import NxLib, NxLibItem, NxLibCommand
+from nxlib.nx_proxy import NxLib, NxLibItem, NxLibCommand
 
 import json
 
-GENERATED_FILE_PATH = "nxlib/nxConstants.py"
+GENERATED_FILE_PATH = "nxlib/nx_constants.py"
 DELETE_AND_GENERATE_NEW_FILE = "w"
 
 
