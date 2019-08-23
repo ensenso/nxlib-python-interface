@@ -1,10 +1,14 @@
-# import nxlib.nxproxy as nx
+import os, sys
+from os.path import dirname, join, abspath
+sys.path.insert(0, abspath(join(dirname(__file__), '..')))
+
 from nxlib.nxproxy import NxLib, NxLibItem, NxLibCommand
 import cv2
 
-if __name__ == "__main__" :
-    
-    nxLib = NxLib('NxLib32.dll')
+from nxlib.nxConstants import Items, Commands, Errors, ApiErrors, Values, ItemTypes
+
+if __name__ == "__main__":
+    nxLib = NxLib('libNxLib64.so')
 
     # print (nxLib.translateReturnCode(1))
 
@@ -12,18 +16,18 @@ if __name__ == "__main__" :
     # gridSpacing.setInt(13)
     # NxLibItem()["Calibration"]["Pattern"]["GridSpacing"] = 14
 
-    #print(gridSpacing.asInt())
+    # print(gridSpacing.asInt())
 
     # print(NxLibItem()["Calibration"]["Pattern"].asJson())
 
     root = NxLibItem()
     print(root.asJson())
 
-
-    angle = NxLibItem()["DefaultParameters"]["RenderView"]["ViewPose"]["Rotation"]["Angle"]
+    angle = NxLibItem()[
+        Items.DefaultParameters][Items.RenderView][Items.ViewPose]["Rotation"]["Angle"]
 
     print(angle.asDouble())
-  
+
     # print(NxLibItem()["DefaultParameters"]["RenderView"]["ShowCameras"].asBool())
 
     # print(NxLibItem()["DefaultParameters"]["RenderView"].count())
@@ -40,7 +44,7 @@ if __name__ == "__main__" :
 
     # item not compatible
     # width, height, channelCount, bytesPerElement, isFloat, timestamp = NxLibItem()["Cameras"]["FileN20-Test2"]["Images"]["Raw"]["Left"].getBinaryDataInfo()
-    
+
     # width, height, channelCount, bytesPerElement, isFloat, timestamp = NxLibItem()["Cameras"]["FileN20-Test2"]["Images"]["Raw"]["Right"].getBinaryDataInfo()
 
     # print(NxLibItem()["DefaultParameters"]["RenderView"]["ShowCameras"].asJson())
@@ -67,21 +71,21 @@ if __name__ == "__main__" :
     cmd = NxLibCommand("Default")
     cmd.parameters()["Cameras"] = "FileN20-Test2"
     print(NxLibItem()["Execute"]["Default"].asJson())
-    cmd.execute("Open",True)
+    cmd.execute("Open", True)
     print(NxLibItem()["Execute"]["Default"].asJson())
-    cmd.parameters()["Cameras"] = "FileN20-Test2"
-    cmd.execute("Capture",True)
+    ##cmd.parameters()["Cameras"] = "FileN20-Test2"
+    # cmd.execute("Capture",True)
 
-    imgL = NxLibItem()["Cameras"]["FileN20-Test2"]["Images"]["Raw"]["Left"].getBinaryData()
-    cv2.imshow('raw left', imgL)
+    ##imgL = NxLibItem()["Cameras"]["FileN20-Test2"]["Images"]["Raw"]["Left"].getBinaryData()
+    ##cv2.imshow('raw left', imgL)
     # cv2.waitKey(0)
 
-    imgR = NxLibItem()["Cameras"]["FileN20-Test2"]["Images"]["Raw"]["Right"].getBinaryData()
-    cv2.imshow('raw right', imgR)
+    ##imgR = NxLibItem()["Cameras"]["FileN20-Test2"]["Images"]["Raw"]["Right"].getBinaryData()
+    ##cv2.imshow('raw right', imgR)
     # cv2.waitKey(0)
 
-    NxLibItem()["Execute"]["Default"]["TestImage"].setBinaryData(imgL)
+    # NxLibItem()["Execute"]["Default"]["TestImage"].setBinaryData(imgL)
 
-    imgT = NxLibItem()["Execute"]["Default"]["TestImage"].getBinaryData()
-    cv2.imshow('test', imgT)
-    cv2.waitKey(0)
+    ##imgT = NxLibItem()["Execute"]["Default"]["TestImage"].getBinaryData()
+    ##cv2.imshow('test', imgT)
+    # cv2.waitKey(0)
