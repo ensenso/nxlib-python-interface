@@ -1,0 +1,43 @@
+# updated / overriden nxLib constants that are defined within the current loaded nxLib
+CONSTANTS_PREFIX = {'Commands': 'cmd', 'Errors': 'err', 'Items': 'itm',
+                    'Values': 'val', 'ApiErrors': 'NxLib', 'ItemTypes': 'NxLib'}
+
+GET_CONSTANTS_CMD = "GetConstants"
+
+
+def _update_constants_module():
+    try:
+        cmd = NxLibCommand(GET_CONSTANTS_CMD)
+        cmd.execute()
+        result = cmd.result()
+
+        itm = result.as_json()
+        json_object = json.loads(itm)
+
+        for constant_type in json_object:
+            if(isinstance(json_object[constant_type], list)):
+                prefix = CONSTANTS_PREFIX[constant_type]
+                for constant in json_object[constant_type]:
+                    variable_name = None
+                    value = None
+                    if isinstance(constant, dict):
+                        variable_name = prefix + constant['Name']
+                        value = constant['Value']
+                    else:
+                        variable_name = prefix + constant
+                        value = str(constant)
+                    variable_name = convert_camel_to_upper_snake(variable_name)
+                    if variable_name.startswith('NX_LIB'):
+                        variable_name = fix_nxlib_prefix(variable_name)
+                    globals()[variable_name] = value
+    except:
+        raise NxLibException("Could not load current nxlib constants. "
+                             "It may be that your nxlib version does not support updating.", "", "")
+
+
+try:
+    _update_constants_module()
+except NxLibException:
+    pass
+except:
+    pass
