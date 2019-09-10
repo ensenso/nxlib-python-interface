@@ -22,9 +22,9 @@ This package is only needed, if you want to run the tests in the ./tests folder:
 There are two ways of installing the package. Either directly from source, or via pip repositories.
 
 #### Installing with Pip Repository
-If you do not need to do any modifications in the installed paket space and only want to use the package as is, we recommend you to install the package with pip. Pip will handle all dependencies of the package and will download the latest package version from here.
+If you do not need to do any modifications in the installed packet space and only want to use the package as is, we recommend you to install the package with pip. Pip will handle all dependencies of the package and will download the latest package version from here.
 
-Global installation (does need priviliged rights).
+Global installation (does need privileged rights).
 ```
 pip3 install nxlib
 ```
@@ -55,7 +55,7 @@ The Python Interface nxlib consists of modules which implement the NxLib classes
 
 ### Global Functions and Constants
   * **api** - The module for accessing global functions.
-  * **constants** - A module, where all constants are defined. When this module is imported, it **updates itself** with the constants defined in the corresponding installed / loaded DLL (Windows) or shared libary (Linux).
+  * **constants** - A module, where all constants are defined. When this module is imported, it **updates itself** with the constants defined in the corresponding installed / loaded DLL (Windows) or shared library (Linux).
   * **helper** - Helper functions that are used within other modules of this package (can be ignored).
 
 ### Classes
