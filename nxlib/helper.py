@@ -47,8 +47,8 @@ def get_lib_name(is_remote_lib=False):
     try:
         return default_lib_names[os + bits]
     except:
-        raise NxLibException("Could not determine NxLib library for this "
-                             "system os: {} and bits: {}".format(os, bits), "", None)
+        raise NxLibError("Could not determine NxLib library for this "
+                         "system os: {} and bits: {}".format(os, bits))
 
 
 def fix_string_encoding(path):

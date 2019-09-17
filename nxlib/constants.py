@@ -791,8 +791,8 @@ def _update_constants_module():
                         variable_name = fix_nxlib_prefix(variable_name)
                     globals()[variable_name] = value
     except:
-        raise NxLibException("Could not load current nxlib constants. "
-                             "It may be that your nxlib version does not support updating.", "", "")
+        raise NxLibError("Could not load current nxlib constants. "
+                         "It may be that your nxlib version does not support updating.", "", "")
 
 
 try:

@@ -23,8 +23,7 @@ NXLIB_ITEM_SEPERATOR = '/'
 NXLIB_INDEX_ESCAPE_CHAR = '\\'
 
 
-class NxLibItem(object):
-
+class NxLibItem:
     def __init__(self, path=None):
         if path is None:
             path = ""
@@ -33,7 +32,7 @@ class NxLibItem(object):
 
     def _check_return_code(self, error_code):
         if error_code != NXLIB_OPERATION_SUCCEEDED:
-            raise NxLibException('NxLibException : ', self.path, error_code)
+            raise NxLibException(self.path, error_code)
 
     def __getitem__(self, value):
         if type(value) is str:
@@ -41,8 +40,7 @@ class NxLibItem(object):
         elif type(value) is int:
             return NxLibItem(self.path + NXLIB_ITEM_SEPERATOR + NXLIB_INDEX_ESCAPE_CHAR + str(value))
         else:
-            raise NxLibException('NxLibException : ',
-                                 self.path, NXLIB_BAD_REQUEST)
+            raise NxLibException(self.path, NXLIB_BAD_REQUEST)
 
     def __setitem__(self, path, value):
         NxLibItem(self.path + NXLIB_ITEM_SEPERATOR + path).set_t(value)
@@ -57,8 +55,7 @@ class NxLibItem(object):
             else:
                 return 1
         else:
-            raise NxLibException('NxLibException : ',
-                                 self.path, NXLIB_ITEM_TYPE_NOT_COMPATIBLE)
+            raise NxLibException(self.path, NXLIB_ITEM_TYPE_NOT_COMPATIBLE)
 
     def __lt__(self, value):
         return self.compare(value) < 0
@@ -85,8 +82,7 @@ class NxLibItem(object):
         elif isinstance(other, NxLibItem):
             self.set_json(other.asJson(), True)
         else:
-            raise NxLibException('NxLibException : ',
-                                 self.path, NXLIB_ITEM_TYPE_NOT_COMPATIBLE)
+            raise NxLibException(self.path, NXLIB_ITEM_TYPE_NOT_COMPATIBLE)
 
     def set_t(self, value):
         if value is None:
@@ -102,8 +98,7 @@ class NxLibItem(object):
             self.set_bool(value)
         # TODO: double is missing?
         else:
-            raise NxLibException('NxLibException : ',
-                                 self.path, NXLIB_ITEM_TYPE_NOT_COMPATIBLE)
+            raise NxLibException(self.path, NXLIB_ITEM_TYPE_NOT_COMPATIBLE)
 
     def set_null(self):
         error_code = nxlib.set_null(self.path)
@@ -148,8 +143,7 @@ class NxLibItem(object):
 
     def set_binary_data_from_cv(self, mat):
         if type(mat).__name__ != 'ndarray':
-            raise NxLibException('NxLibException : ',
-                                 self.path, NXLIB_ITEM_TYPE_NOT_COMPATIBLE)
+            raise NxLibException(self.path, NXLIB_ITEM_TYPE_NOT_COMPATIBLE)
 
         channel_count = mat.shape[2]
         is_float = False
@@ -220,8 +214,7 @@ class NxLibItem(object):
         elif self.is_bool():
             return self.as_bool()
         else:
-            raise NxLibException('NxLibException : ',
-                                 self.path, NXLIB_ITEM_TYPE_NOT_COMPATIBLE)
+            raise NxLibException(self.path, NXLIB_ITEM_TYPE_NOT_COMPATIBLE)
 
     def as_int(self):
         i, error_code = nxlib.get_int(self.path)

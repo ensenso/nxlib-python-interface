@@ -1,21 +1,42 @@
-class NxLibException(Exception):
-    def __init__(self, message, path, error_code):
-        # super(NxLibException, self).__init__(message)
-        # super().__init__(message)
+import nxlib
 
-        self.path = path
-        self.error_code = error_code
-        self.message = str(message) + str(' at ') + str(self.path) + \
-            str(' - error_code ') + str(self.error_code)
+__all__ = [
+    "NxLibError",
+    "NxLibException"
+]
 
-    def get_error_code(self):
-        return self.error_code
 
-    def get_error_text(self):
-        return str(self.message)
-
-    def get_item_path(self):
-        return self.path
+class NxLibError(Exception):
+    def __init__(self, message=None):
+        self._message = message
 
     def __str__(self):
-        return str(self.message)
+        return self._message
+
+
+class NxLibException(NxLibError):
+    def __init__(self, path, error_code, command=None):
+        self._path = path
+        self._error_code = error_code
+
+        # Save command object in the exception to keep temporary slots alive while an exception exists.
+        self._command = command
+
+    def get_error_code(self):
+        return self._error_code
+
+    def get_error_text(self):
+        return nxlib.api.translate_error_code(self._error_code)
+
+    def get_item_path(self):
+        return self._path
+
+    def __str__(self):
+        message = "NxLib error {} ({}) for item {}".format(self._error_code, self.get_error_text(), self._path)
+
+        try:
+            message += "\nCurrent item value: {}".format(nxlib.NxLibItem(self._path).as_json(True))
+        except NxLibError:
+            pass
+
+        return message

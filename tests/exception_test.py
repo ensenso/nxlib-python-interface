@@ -1,16 +1,21 @@
 import pytest
+
+import nxlib
 from nxlib import NxLibException
 
 
-def test_message():
-    error_message = None
-    test_message = "This is a message"
-    error_code = 42
+def test_exception_message():
+    error_code = nxlib.constants.NXLIB_ITEM_TYPE_NOT_COMPATIBLE
+    error_text = nxlib.api.translate_error_code(error_code)
     dummy_path = "/dummy_path"
-    should_be_message = "This is a message at {} - error_code {}".format(dummy_path, error_code)
-    try:
-        raise NxLibException(test_message, dummy_path, error_code)
-    except NxLibException as e:
-        error_message = e.get_error_text()
 
-    assert error_message == should_be_message
+    exception = None
+    try:
+        raise NxLibException(dummy_path, error_code)
+    except NxLibException as e:
+        exception = e
+
+    assert exception.get_item_path() == dummy_path
+    assert exception.get_error_code() == error_code
+    assert exception.get_error_text() == error_text
+    assert str(exception) == "NxLib error {} ({}) for item {}".format(error_code, error_text, dummy_path)

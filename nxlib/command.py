@@ -16,10 +16,8 @@ NXLIB_EXECUTION_FAILED = 17
 NXLIB_ITEM_TYPE_NULL = 1
 
 
-class NxLibCommand(object):
-
+class NxLibCommand:
     def __init__(self, command_name, node_name=None):
-
         self.command_name = command_name
         self.remove_slot_on_destruction = False
         temporary_item = node_name is None
@@ -42,10 +40,6 @@ class NxLibCommand(object):
         exec_item = NxLibItem()[ITM_EXECUTE]
         self.command_item = exec_item.make_unique_item(base_name)
 
-    def check_return_code(self, return_code):
-        if return_code != NXLIB_OPERATION_SUCCEEDED:
-            raise NxLibException('NxLibException : ', self.command_item.path, return_code)
-
     def parameters(self):
         return self.command_item[ITM_PARAMETERS]
 
@@ -53,36 +47,21 @@ class NxLibCommand(object):
         return self.command_item[ITM_RESULT]
 
     def successful(self):
-        error_code = NXLIB_OPERATION_SUCCEEDED
-        has_error = False
-        try:
-            has_error = self.result()[ITM_ERROR_SYMBOL].exists()
-        except NxLibException as e:
-            error_code = e.get_error_code()
-        return not has_error  # ,error_code
+        return not self.result()[ITM_ERROR_SYMBOL].exists()
 
     def execute(self, command_name=None, wait=True):
         function_item = self.command_item[ITM_COMMAND]
         if not command_name:
             command_name = self.command_name
-        try:
-            function_item.set_t(command_name)
-        except NxLibException as e:
-            return e.get_error_code()
+        function_item.set_t(command_name)
 
         if wait:
-            try:
-                function_item.wait_for_type(NXLIB_ITEM_TYPE_NULL, True)
-            except NxLibException as e:
-                return e.get_error_code()
-
-            successfull = self.successful()
-            return_code = NXLIB_OPERATION_SUCCEEDED if successfull else NXLIB_EXECUTION_FAILED
-            self.check_return_code(return_code)
+            function_item.wait_for_type(NXLIB_ITEM_TYPE_NULL, True)
+            self.assert_successful()
 
     def finished(self):
         return not self.command_item[ITM_COMMAND].exists() or self.command_item[ITM_COMMAND].type() == NXLIB_ITEM_TYPE_NULL
 
     def assert_successful(self):
-        if not self.finished() or not self.successful:
-            self.check_return_code(NXLIB_EXECUTION_FAILED)
+        if not self.finished() or not self.successful():
+            raise NxLibException(self.command_item.path, NXLIB_EXECUTION_FAILED, self)

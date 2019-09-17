@@ -121,7 +121,7 @@ def load_lib(path=None):
         _nxlib.lib_object = CDLL(path)
     _nxlib.is_remote = False
     if _nxlib.lib_object is None:
-        raise NxLibException("Could not load shared library", "", NXLIB_INTERNAL_ERROR)
+        raise NxLibError("Could not load shared library")
 
 
 def load_remote_lib(path=None):
@@ -132,12 +132,12 @@ def load_remote_lib(path=None):
         _nxlib.lib_object = CDLL(path)
     _nxlib.is_remote = True
     if _nxlib.lib_object is None:
-        raise NxLibException("Could not load shared remote library", "", NXLIB_INTERNAL_ERROR)
+        raise NxLibError("Could not load shared remote library")
 
 
 def check_return_code(error_code):
     if error_code != NXLIB_OPERATION_SUCCEEDED:
-        raise NxLibException('NxLibException : ', "", error_code)
+        raise NxLibException("", error_code)
 
 
 def _set(f, path, value):
