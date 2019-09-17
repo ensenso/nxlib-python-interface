@@ -3,6 +3,8 @@
 from .exception import NxLibException
 from .item import NxLibItem
 
+__all__ = ["NxLibCommand"]
+
 ITM_EXECUTE = "Execute"
 ITM_RESULT = "Result"
 ITM_COMMAND = "Command"

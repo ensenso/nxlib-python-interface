@@ -5,6 +5,48 @@ from ctypes import *
 
 import nxlib.helper as helper
 
+__all__ = [
+    "close_tcp_port",
+    "connect",
+    "disconnect",
+    "erase",
+    "finalize",
+    "get_binary",
+    "get_binary_info",
+    "get_bool",
+    "get_count",
+    "get_debug_buffer",
+    "get_debug_messages",
+    "get_double",
+    "get_int",
+    "get_json",
+    "get_json_meta",
+    "get_name",
+    "get_string",
+    "get_type",
+    "initialize",
+    "is_current_lib_remote",
+    "load_lib",
+    "load_remote_lib",
+    "make_unique_item",
+    "open_tcp_port",
+    "set_binary",
+    "set_binary_formatted",
+    "set_bool",
+    "set_double",
+    "set_int",
+    "set_json",
+    "set_null",
+    "set_string",
+    "translate_error_code",
+    "wait_for_bool_value",
+    "wait_for_change",
+    "wait_for_double_value",
+    "wait_for_int_value",
+    "wait_for_string_value",
+    "wait_for_type"
+]
+
 NXLIB_INTERNAL_ERROR = 7
 NXLIB_OPERATION_SUCCEEDED = 0
 
