@@ -80,7 +80,7 @@ class NxLibItem:
         if type(other) is str:
             self.set_json(str, True)
         elif isinstance(other, NxLibItem):
-            self.set_json(other.asJson(), True)
+            self.set_json(other.as_json(), True)
         else:
             raise NxLibException(self.path, NXLIB_ITEM_TYPE_NOT_COMPATIBLE)
 

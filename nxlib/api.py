@@ -330,7 +330,9 @@ def get_json(path, pretty_print, number_precision, scientific_number_format):
     error_code = c_int32(0)
     result = f(byref(error_code), path, pretty_print,
                number_precision, scientific_number_format)
-    return result.decode(), error_code.value
+    if result is not None:
+        result = result.decode()
+    return result, error_code.value
 
 # NXLIBSTR nxLibGetJsonMeta (NXLIBERR* result, NXLIBSTR itemPath, NXLIBINT num_levels, NXLIBBOOL pretty_print,
 # NXLIBINT number_precision, NXLIBBOOL scientific_number_format);
@@ -346,7 +348,9 @@ def get_json_meta(path, num_levels, pretty_print, number_precision, scientific_n
     error_code = c_int32(0)
     result = f(byref(error_code), path, num_levels, pretty_print,
                number_precision, scientific_number_format)
-    return result.decode(), error_code.value
+    if result is not None:
+        result = result.decode()
+    return result, error_code.value
 
 
 def erase(path):

@@ -66,9 +66,14 @@ def test_exists():
 def test_doesnt_exist():
     assert NxLibItem()[ITM_DEFAULT_PARAMETERS]["Blubb"].exists() == False
 
+
+def test_as_json():
+    NxLibItem().as_json()
+
+
 def test_set_and_return():
     NxLibItem()["test"]["item"] = 42
     assert NxLibItem()["test"]["item"].is_number()
 
-    value =  NxLibItem()["test"]["item"].as_int()
+    value = NxLibItem()["test"]["item"].as_int()
     assert value == 42
