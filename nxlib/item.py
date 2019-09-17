@@ -24,7 +24,9 @@ NXLIB_INDEX_ESCAPE_CHAR = '\\'
 
 class NxLibItem(object):
 
-    def __init__(self, path=""):
+    def __init__(self, path=None):
+        if path is None:
+            path = ""
         self.path = path
         pass
 
@@ -78,9 +80,9 @@ class NxLibItem(object):
     def __lshift__(self, other):
         # call setJson on str, and setJson(itm.asJson()) on other
         if type(other) is str:
-            self.setJson(str, True)
+            self.set_json(str, True)
         elif isinstance(other, NxLibItem):
-            self.setJson(other.asJson(), True)
+            self.set_json(other.asJson(), True)
         else:
             raise NxLibException('NxLibException : ',
                                  self.path, NXLIB_ITEM_TYPE_NOT_COMPATIBLE)
@@ -175,13 +177,13 @@ class NxLibItem(object):
             cbuffer = np.ctypeslib.as_ctypes(buffer)
         else:
             cbuffer = []  # ?? to test # TODO
-        bytes_copied, timestamp, error_code = nxlib.get_binary(
+        _, _, error_code = nxlib.get_binary(
             self.path, cbuffer, buffer_size)
         self._check_return_code(error_code)
         return buffer
 
     def create_buffer(self):
-        width, height, channel_count, bpe, is_float, timestamp, error_code = self.get_binary_data_info()
+        width, height, channel_count, bpe, is_float, _, _ = self.get_binary_data_info()
         nptype = np.uint8
         if is_float:
             if bpe == 4:
@@ -210,10 +212,8 @@ class NxLibItem(object):
     def as_t(self):
         if self.is_null():
             return None
-        elif self.is_double():
+        elif self.is_number():
             return self.as_double()
-        elif self.is_int():
-            return self.as_int()
         elif self.is_string():
             return self.as_string()
         elif self.is_bool():

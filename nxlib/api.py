@@ -5,9 +5,6 @@ from ctypes import *
 
 import nxlib.helper as helper
 
-INSTANCE = 'instance'
-REMOTE_FLAG = 'remote'
-
 NXLIB_INTERNAL_ERROR = 7
 NXLIB_OPERATION_SUCCEEDED = 0
 
@@ -407,7 +404,7 @@ def get_debug_messages():
 
 
 def get_debug_buffer():
-    pass
+    raise NotImplementedError()
 
 
 def initialize(wait_for_initial_camera_refresh=True):
