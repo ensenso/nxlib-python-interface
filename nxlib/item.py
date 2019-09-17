@@ -19,7 +19,7 @@ NXLIB_OPERATION_SUCCEEDED = 0
 NXLIB_BAD_REQUEST = 11
 NXLIB_ITEM_TYPE_NOT_COMPATIBLE = 13
 
-NXLIB_ITEM_SEPERATOR = '/'
+NXLIB_ITEM_SEPARATOR = '/'
 NXLIB_INDEX_ESCAPE_CHAR = '\\'
 
 
@@ -36,14 +36,14 @@ class NxLibItem:
 
     def __getitem__(self, value):
         if type(value) is str:
-            return NxLibItem(self.path + NXLIB_ITEM_SEPERATOR + value)
+            return NxLibItem(self.path + NXLIB_ITEM_SEPARATOR + value)
         elif type(value) is int:
-            return NxLibItem(self.path + NXLIB_ITEM_SEPERATOR + NXLIB_INDEX_ESCAPE_CHAR + str(value))
+            return NxLibItem(self.path + NXLIB_ITEM_SEPARATOR + NXLIB_INDEX_ESCAPE_CHAR + str(value))
         else:
             raise NxLibException(self.path, NXLIB_BAD_REQUEST)
 
     def __setitem__(self, path, value):
-        NxLibItem(self.path + NXLIB_ITEM_SEPERATOR + path).set_t(value)
+        NxLibItem(self.path + NXLIB_ITEM_SEPARATOR + path).set_t(value)
 
     def compare(self, value):
         item_value = self.as_t()

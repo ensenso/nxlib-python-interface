@@ -2,9 +2,9 @@ import json
 from nxlib import NxLibCommand, NxLibException
 from .helper import convert_camel_to_upper_snake, fix_nxlib_prefix
 
-NXLIB_ITEM_SEPERATOR = '/'
+NXLIB_ITEM_SEPARATOR = '/'
 NXLIB_INDEX_ESCAPE_CHAR = '\\'
-NXLIB_ITEM_FORBIDDEN_CHARS = "/\\\\r\n\0"
+NXLIB_ITEM_FORBIDDEN_CHARS = "\r\n\"/\\\0"
 
 
 NXLIB_BAD_REQUEST = 11
