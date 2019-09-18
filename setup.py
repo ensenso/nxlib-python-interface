@@ -17,8 +17,7 @@ setup(name='nxlib',
       classifiers=[
           'Development Status :: 3 - Beta',
           'License :: OSI Approved :: MIT License',
-          'Programming Language :: Python :: 3',
-          'Topic :: Text Processing :: Linguistic',
+          'Programming Language :: Python :: 3'
       ],
       url='https://git.ensenso.de/pub/nxlib-python-interface',
       author='Yasin Guenduez, Paul Rogister',

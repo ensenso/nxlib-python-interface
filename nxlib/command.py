@@ -18,41 +18,42 @@ NXLIB_ITEM_TYPE_NULL = 1
 
 class NxLibCommand:
     def __init__(self, command_name, node_name=None):
-        self.command_name = command_name
-        self.remove_slot_on_destruction = False
-        temporary_item = node_name is None
+        self._command_name = command_name
+        self._remove_slot_on_destruction = False
 
-        if temporary_item:
-            self.command_item = NxLibItem()[ITM_EXECUTE].make_unique_item()
-            self.remove_slot_on_destruction = True
+        if node_name is None:
+            self.create_temporary_slot()
         else:
-            self.command_item = NxLibItem()[ITM_EXECUTE][node_name]
+            self._command_item = NxLibItem()[ITM_EXECUTE][node_name]
 
     def __del__(self):
         try:
-            if self.remove_slot_on_destruction:
-                self.command_item.erase()
+            if self._remove_slot_on_destruction:
+                self._command_item.erase()
         except NxLibException:
             pass
 
-    def create_temporary_slot(self, base_name):
-        self.remove_slot_on_destruction = True
-        exec_item = NxLibItem()[ITM_EXECUTE]
-        self.command_item = exec_item.make_unique_item(base_name)
+    def create_temporary_slot(self, base_name=None):
+        self._command_item = NxLibItem()[ITM_EXECUTE].make_unique_item(base_name)
+        self._remove_slot_on_destruction = True
+
+    def slot(self):
+        return self._command_item
 
     def parameters(self):
-        return self.command_item[ITM_PARAMETERS]
+        return self.slot()[ITM_PARAMETERS]
 
     def result(self):
-        return self.command_item[ITM_RESULT]
+        return self.slot()[ITM_RESULT]
 
     def successful(self):
         return not self.result()[ITM_ERROR_SYMBOL].exists()
 
     def execute(self, command_name=None, wait=True):
-        function_item = self.command_item[ITM_COMMAND]
         if not command_name:
-            command_name = self.command_name
+            command_name = self._command_name
+
+        function_item = self.slot()[ITM_COMMAND]
         function_item.set_t(command_name)
 
         if wait:
@@ -60,8 +61,8 @@ class NxLibCommand:
             self.assert_successful()
 
     def finished(self):
-        return not self.command_item[ITM_COMMAND].exists() or self.command_item[ITM_COMMAND].type() == NXLIB_ITEM_TYPE_NULL
+        return not self.slot()[ITM_COMMAND].exists() or self.slot()[ITM_COMMAND].is_null()
 
     def assert_successful(self):
         if not self.finished() or not self.successful():
-            raise NxLibException(self.command_item.path, NXLIB_EXECUTION_FAILED, self)
+            raise NxLibException(self.slot().path, NXLIB_EXECUTION_FAILED, self)

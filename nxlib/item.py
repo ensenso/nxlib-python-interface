@@ -1,5 +1,5 @@
 import nxlib.api as nxlib
-from .exception import NxLibException
+from .exception import NxLibError, NxLibException
 
 import numpy as np
 
@@ -40,10 +40,10 @@ class NxLibItem:
         elif type(value) is int:
             return NxLibItem(self.path + NXLIB_ITEM_SEPARATOR + NXLIB_INDEX_ESCAPE_CHAR + str(value))
         else:
-            raise NxLibException(self.path, NXLIB_BAD_REQUEST)
+            raise NxLibError("Value cannot be added to NxLib path")
 
     def __setitem__(self, path, value):
-        NxLibItem(self.path + NXLIB_ITEM_SEPARATOR + path).set_t(value)
+        self[path].set_t(value)
 
     def compare(self, value):
         item_value = self.as_t()

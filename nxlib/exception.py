@@ -35,7 +35,8 @@ class NxLibException(NxLibError):
         message = "NxLib error {} ({}) for item {}".format(self._error_code, self.get_error_text(), self._path)
 
         try:
-            message += "\nCurrent item value: {}".format(nxlib.NxLibItem(self._path).as_json(True))
+            if self._path:
+                message += "\nCurrent item value: {}".format(nxlib.NxLibItem(self._path).as_json(True))
         except NxLibError:
             pass
 
