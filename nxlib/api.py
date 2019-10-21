@@ -83,6 +83,15 @@ class _Nxlib():
         self.is_remote = False
         self.lib_object = None
 
+    def __del__(self):
+        if self.is_remote:
+            disconnect()
+        else:
+            finalize()
+        if self.lib_object:
+            del self.lib_object
+
+
 
 # testing flag
 __nx_testing__ = False
