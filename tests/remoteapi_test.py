@@ -9,7 +9,6 @@ from tests.remoteapi_test_helper import tcp_port, host_name
 
 import time
 
-
 import nxlib.api as nxlib_remote
 
 CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -25,8 +24,6 @@ def nxlib_pid():
     nxlib_procc = Popen(['python3', '-u', helper_file], stdin=PIPE, stdout=PIPE,
                         universal_newlines=True, bufsize=1)
 
-    # hack: pytest currently captures stdin and stdout pipe
-    # so we just wait till the normal nxlib is getting started. (no stdin/stoud communication possible)
     time.sleep(10)  # wait for 10 secs, to make sure the lib is loaded successfully
     assert nxlib_procc is not None, "Could not start nxlib subprocess"
     return nxlib_procc

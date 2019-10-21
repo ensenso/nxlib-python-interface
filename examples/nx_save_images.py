@@ -3,7 +3,6 @@ from nxlib.constants import *
 import nxlib.api as api
 
 import argparse
-import numpy
 
 
 def get_camera_node(serial):
@@ -18,7 +17,7 @@ def get_camera_node(serial):
 def main(args):
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--serial", type=str, required=True,
-        help="The serial of the stereo camera, you want to open")
+                        help="The serial of the stereo camera, you want to open")
     args = parser.parse_args(args)
 
     camera_serial = args.serial
@@ -72,4 +71,5 @@ def main(args):
 
 if __name__ == "__main__":
     import sys
+
     main(sys.argv[1:])

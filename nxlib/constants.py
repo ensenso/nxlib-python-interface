@@ -9,7 +9,6 @@ NXLIB_ITEM_SEPARATOR = '/'
 NXLIB_INDEX_ESCAPE_CHAR = '\\'
 NXLIB_ITEM_FORBIDDEN_CHARS = "\r\n\"/\\\0"
 
-
 NXLIB_BAD_REQUEST = 11
 NXLIB_BUFFER_NOT_DIVISIBLE_BY_ELEMENT_SIZE = 16
 NXLIB_BUFFER_TOO_SMALL = 15
@@ -761,7 +760,7 @@ VAL_XYZ = "XYZ"
 VAL_Y = "Y"
 VAL_Z = "Z"
 VAL_ZYX = "ZYX"
-# updated / overriden nxLib constants that are defined within the current loaded nxLib
+
 CONSTANTS_PREFIX = {'Commands': 'cmd', 'Errors': 'err', 'Items': 'itm',
                     'Values': 'val', 'ApiErrors': 'NxLib', 'ItemTypes': 'NxLib'}
 
@@ -778,7 +777,7 @@ def _update_constants_module():
         json_object = json.loads(itm)
 
         for constant_type in json_object:
-            if(isinstance(json_object[constant_type], list)):
+            if (isinstance(json_object[constant_type], list)):
                 prefix = CONSTANTS_PREFIX[constant_type]
                 for constant in json_object[constant_type]:
                     variable_name = None

@@ -92,7 +92,6 @@ class _Nxlib():
             del self.lib_object
 
 
-
 # testing flag
 __nx_testing__ = False
 
@@ -218,13 +217,8 @@ def set_binary_formatted(path, buffer, width, height, channel_count, bytes_per_e
     buffer = cast(buffer, POINTER(c_void_p))
     error_code = c_int32(0)
     f(byref(error_code), path, buffer, width, height,
-        channel_count, bytes_per_element, is_float)
+      channel_count, bytes_per_element, is_float)
     return error_code.value
-
-# getters
-
-# void nxLibGetBinary (NXLIBERR* result, NXLIBSTR itemPath, void* destinationBuffer,
-# NXLIBINT buffer_size, NXLIBINT* bytes_copied, NXLIBDOUBLE* timestamp);
 
 
 def get_binary(path, destination_buffer, buffer_size):
@@ -239,7 +233,7 @@ def get_binary(path, destination_buffer, buffer_size):
     timestamp = c_double(0)
 
     f(byref(error_code), path, destination_buffer,
-        buffer_size, byref(bytes_copied), byref(timestamp))
+      buffer_size, byref(bytes_copied), byref(timestamp))
 
     return bytes_copied.value, timestamp.value, error_code.value
 
@@ -259,7 +253,7 @@ def get_binary_info(path):
     timestamp = c_double(0)
 
     f(byref(error_code), path, byref(width), byref(height), byref(channel_count), byref(bytes_per_element),
-        byref(is_float), byref(timestamp))
+      byref(is_float), byref(timestamp))
 
     return (width.value, height.value, channel_count.value, bytes_per_element.value,
             is_float.value == 1, timestamp.value, error_code.value)
@@ -327,9 +321,6 @@ def get_name(path):
         s = s.decode()
     return s, error_code
 
-# NXLIBSTR nxLibGetJson (NXLIBERR* result, NXLIBSTR itemPath, NXLIBBOOL pretty_print,
-# NXLIBINT number_precision, NXLIBBOOL scientific_number_format);
-
 
 def get_json(path, pretty_print, number_precision, scientific_number_format):
     path = helper.fix_string_encoding(path)
@@ -342,9 +333,6 @@ def get_json(path, pretty_print, number_precision, scientific_number_format):
     if result is not None:
         result = result.decode()
     return result, error_code.value
-
-# NXLIBSTR nxLibGetJsonMeta (NXLIBERR* result, NXLIBSTR itemPath, NXLIBINT num_levels, NXLIBBOOL pretty_print,
-# NXLIBINT number_precision, NXLIBBOOL scientific_number_format);
 
 
 def get_json_meta(path, num_levels, pretty_print, number_precision, scientific_number_format):
@@ -455,8 +443,6 @@ def get_debug_messages():
     check_return_code(return_code)
     return result.decode()
 
-# NxLibApi
-
 
 def get_debug_buffer():
     raise NotImplementedError()
@@ -504,7 +490,6 @@ def close_tcp_port():
     check_return_code(return_code.value)
 
 
-# NxLibRemote
 def connect(hostname, port):
     if not _lib_is_remote():
         raise Exception("Cannot use connect function from a not remote NxLib.")

@@ -40,11 +40,9 @@ def test_no_wait_fail():
     import time
     cmd = NxLibCommand(CMD_CREATE_CAMERA)
     cmd.parameters()[ITM_FOLDER_PATH] = "this folder does not exist!"
-
-    #If we do not wait, execute should not throw
-    cmd.execute(None, False) 
+    cmd.execute(None, False)
     while not cmd.finished():
-        time.sleep(1) # 1 [s]
+        time.sleep(1)
     assert not cmd.successful()
 
 

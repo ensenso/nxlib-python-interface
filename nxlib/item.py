@@ -5,7 +5,6 @@ import numpy as np
 
 __all__ = ["NxLibItem"]
 
-
 NXLIB_ITEM_TYPE_INVALID = 0
 NXLIB_ITEM_TYPE_NULL = 1
 NXLIB_ITEM_TYPE_NUMBER = 2
@@ -76,7 +75,6 @@ class NxLibItem:
         return self.compare(value) >= 0
 
     def __lshift__(self, other):
-        # call setJson on str, and setJson(itm.asJson()) on other
         if type(other) is str:
             self.set_json(str, True)
         elif isinstance(other, NxLibItem):
@@ -127,11 +125,10 @@ class NxLibItem:
     def set_binary_data(self, buffer, buffer_size_or_width=0, height=0,
                         channel_count=0, bytes_per_element=0, is_float=0):
         if buffer_size_or_width == 0:
-            # cvMat
             self.set_binary_data_from_cv(buffer)
         else:
 
-            if (channel_count > 0):  # formatted
+            if (channel_count > 0):
                 width = buffer_size_or_width
                 error_code = nxlib.set_binary_formatted(self.path, buffer, width, height,
                                                         channel_count, bytes_per_element,
@@ -160,7 +157,7 @@ class NxLibItem:
             bpe = 8
             is_float = True
 
-        buffer = np.ctypeslib.as_ctypes(mat)  # mat.ravel()
+        buffer = np.ctypeslib.as_ctypes(mat)
         error_code = nxlib.set_binary_formatted(
             self.path, buffer, mat.shape[1], mat.shape[0], channel_count, bpe, is_float)
         self._check_return_code(error_code)
@@ -182,16 +179,16 @@ class NxLibItem:
         nptype = np.uint8
         if is_float:
             if bpe == 4:
-                nptype = np.float32  # 'float32'
+                nptype = np.float32
             elif bpe == 8:
-                nptype = np.float64  # 'float64'
+                nptype = np.float64
         else:
             if bpe == 1:
-                nptype = np.uint8  # 'uint8'
+                nptype = np.uint8
             elif bpe == 2:
-                nptype = np.int16  # 'int16'
+                nptype = np.int16
             elif bpe == 4:
-                nptype = np.int32  # 'int32'
+                nptype = np.int32
 
         image_buffer = np.zeros(
             (height, width, channel_count), nptype, order='C')
@@ -319,7 +316,6 @@ class NxLibItem:
 
     def wait_for_value(self, value, wait_for_equal):
         if type(value) is int:
-            # double or int ?
             error_code = nxlib.wait_for_int_value(self.path, value, wait_for_equal)
         elif type(value) is str:
             error_code = nxlib.wait_for_string_value(

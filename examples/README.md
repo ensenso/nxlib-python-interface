@@ -31,7 +31,7 @@ where _-s_ is the argument specifier and _abc_ the corresponding value of the ar
 ```bash
 pip3 install open3d-python
 ```
-or (if no sufficient priviliges)
+or (if no sufficient privileges)
 ```bash
 pip3 install --user open3d-python
 ```

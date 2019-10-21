@@ -155,5 +155,5 @@ We use [Semantic Versioning](http://semver.org/). For the versions available, se
 
 ## Licence
 
-This project is licensed under the MIT Licence - see the [LICENCE.md](LICENCE.md) file for details
+This project is licensed under the MIT Licence - see the [LICENSE.md](LICENSE.md) file for details
 

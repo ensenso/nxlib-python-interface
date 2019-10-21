@@ -48,6 +48,3 @@ def test_set_bool():
     bool_test = nxlib.get_bool("/test")
     assert (bool_test[0] == True)
     assert (bool_test[1] == 0)
-
-# Test Initialize
-# Test finalize

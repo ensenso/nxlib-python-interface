@@ -7,7 +7,6 @@ import sys
 import time
 import subprocess
 
-
 global nxlib_started
 nxlib_started = False
 

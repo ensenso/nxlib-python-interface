@@ -21,14 +21,14 @@ def test_camel_to_upper_snake():
     converted_string = convert_camel_to_upper_snake(nxlib_constant)
     assert converted_string == "LOWER_CAMEL_CASE"
 
-
     nxlib_constant = "UpperCamelCase"
     converted_string = convert_camel_to_upper_snake(nxlib_constant)
     assert converted_string == "UPPER_CAMEL_CASE"
 
+
 def test_nxlib_prefix():
     constant = 'NX_LIB_ANYTHING'
     expected = 'NXLIB_ANYTHING'
-    
-    result = fix_nxlib_prefix (constant)
+
+    result = fix_nxlib_prefix(constant)
     assert expected == result

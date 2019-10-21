@@ -1,10 +1,9 @@
-from nxlib import NxLibItem
+from nxlib import NxLibItem, NxLibException
 from nxlib.constants import *
 import nxlib.api as api
 
 
 def main():
-
     try:
         # Waits for the cameras to be initialized
         api.initialize()

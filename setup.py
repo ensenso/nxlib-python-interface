@@ -1,15 +1,13 @@
 from setuptools import setup
 from os import path
 
-
-# read the contents of your README file
 this_directory = path.abspath(path.dirname(__file__))
 with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(name='nxlib',
       packages=['nxlib'],
-      python_requires='>3.5.0',  # from 3.5 numpy is default installed
+      python_requires='>3.5.0',
       version='0.1',
       description='Python interface to interact with the Ensenso NxLib',
       long_description=long_description,
@@ -19,12 +17,10 @@ setup(name='nxlib',
           'License :: OSI Approved :: MIT License',
           'Programming Language :: Python :: 3'
       ],
-      url='https://git.ensenso.de/pub/nxlib-python-interface',
+      url='https://github.com/ensenso/nxlib-python-interface.git',
       author='Yasin Guenduez, Paul Rogister',
       author_email='yasin.guenduez@ensenso.com, paul.rogister@isys-vision.de',
       license='MIT',
-
-      # Either cv or numpy is needed for image buffers
       install_requires=[
           'numpy'
       ],

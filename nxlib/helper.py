@@ -4,7 +4,7 @@ import os
 import platform
 import re
 
-from .exception import NxLibException
+from .exception import NxLibError
 
 
 def find_and_return_lib(possible_directories, library_name):
@@ -16,8 +16,8 @@ def find_and_return_lib(possible_directories, library_name):
 
 def _get_os():
     operating_systems = {"win": "Windows",
-                     "linux": "Linux",
-                     "mac": "Darwin"}
+                         "linux": "Linux",
+                         "mac": "Darwin"}
 
     detected_os = platform.platform(terse=True)
     for possible_os in operating_systems:
@@ -33,14 +33,14 @@ def _get_architecture_bits():
 def get_lib_name(is_remote_lib=False):
     if is_remote_lib:
         default_lib_names = {"win32bit": "NxLibRemote32.dll",
-                            "win64bit": "NxLibRemote32.dll",
-                            "linux32bit": "libNxLibRemote32.so",
-                            "linux64bit": "libNxLibRemote64.so"}
+                             "win64bit": "NxLibRemote32.dll",
+                             "linux32bit": "libNxLibRemote32.so",
+                             "linux64bit": "libNxLibRemote64.so"}
     else:
         default_lib_names = {"win32bit": "NxLib32.dll",
-                            "win64bit": "NxLib64.dll",
-                            "linux32bit": "libNxLib32.so",
-                            "linux64bit": "libNxLib64.so"}
+                             "win64bit": "NxLib64.dll",
+                             "linux32bit": "libNxLib32.so",
+                             "linux64bit": "libNxLib64.so"}
     os = _get_os()
     bits = _get_architecture_bits()
 
