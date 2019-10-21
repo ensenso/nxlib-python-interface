@@ -1,6 +1,9 @@
 import json
-from nxlib import NxLibCommand, NxLibException, NxLibError
-from .helper import convert_camel_to_upper_snake, fix_nxlib_prefix
+
+from .exception import NxLibError as _NxLibError
+from .command import NxLibCommand as _NxLibCommand
+from .helper import convert_camel_to_upper_snake as _convert_camel_to_upper_snake
+from .helper import fix_nxlib_prefix as _fix_nxlib_prefix
 
 NXLIB_ITEM_SEPARATOR = '/'
 NXLIB_INDEX_ESCAPE_CHAR = '\\'
@@ -767,7 +770,7 @@ GET_CONSTANTS_CMD = "GetConstants"
 
 def _update_constants_module():
     try:
-        cmd = NxLibCommand(GET_CONSTANTS_CMD)
+        cmd = _NxLibCommand(GET_CONSTANTS_CMD)
         cmd.execute()
         result = cmd.result()
 
@@ -786,18 +789,18 @@ def _update_constants_module():
                     else:
                         variable_name = prefix + constant
                         value = str(constant)
-                    variable_name = convert_camel_to_upper_snake(variable_name)
+                    variable_name = _convert_camel_to_upper_snake(variable_name)
                     if variable_name.startswith('NX_LIB'):
-                        variable_name = fix_nxlib_prefix(variable_name)
+                        variable_name = _fix_nxlib_prefix(variable_name)
                     globals()[variable_name] = value
     except:
-        raise NxLibError("Could not load current nxlib constants. "
-                         "It may be that your nxlib version does not support updating.")
+        raise _NxLibError("Could not load current nxlib constants. "
+                          "It may be that your nxlib version does not support updating.")
 
 
 try:
     _update_constants_module()
-except NxLibException:
+except _NxLibError:
     pass
 except:
     pass

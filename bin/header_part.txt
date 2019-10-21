@@ -1,6 +1,9 @@
 import json
-from nxlib import NxLibCommand, NxLibError
-from .helper import convert_camel_to_upper_snake, fix_nxlib_prefix
+
+from .exception import NxLibError as _NxLibError
+from .command import NxLibCommand as _NxLibCommand
+from .helper import convert_camel_to_upper_snake as _convert_camel_to_upper_snake
+from .helper import fix_nxlib_prefix as _fix_nxlib_prefix
 
 NXLIB_ITEM_SEPARATOR = '/'
 NXLIB_INDEX_ESCAPE_CHAR = '\\'

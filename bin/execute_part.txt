@@ -7,7 +7,7 @@ GET_CONSTANTS_CMD = "GetConstants"
 
 def _update_constants_module():
     try:
-        cmd = NxLibCommand(GET_CONSTANTS_CMD)
+        cmd = _NxLibCommand(GET_CONSTANTS_CMD)
         cmd.execute()
         result = cmd.result()
 
@@ -15,7 +15,7 @@ def _update_constants_module():
         json_object = json.loads(itm)
 
         for constant_type in json_object:
-            if(isinstance(json_object[constant_type], list)):
+            if (isinstance(json_object[constant_type], list)):
                 prefix = CONSTANTS_PREFIX[constant_type]
                 for constant in json_object[constant_type]:
                     variable_name = None
@@ -26,18 +26,18 @@ def _update_constants_module():
                     else:
                         variable_name = prefix + constant
                         value = str(constant)
-                    variable_name = convert_camel_to_upper_snake(variable_name)
+                    variable_name = _convert_camel_to_upper_snake(variable_name)
                     if variable_name.startswith('NX_LIB'):
-                        variable_name = fix_nxlib_prefix(variable_name)
+                        variable_name = _fix_nxlib_prefix(variable_name)
                     globals()[variable_name] = value
     except:
-        raise NxLibError("Could not load current nxlib constants. "
-                         "It may be that your nxlib version does not support updating.")
+        raise _NxLibError("Could not load current nxlib constants. "
+                          "It may be that your nxlib version does not support updating.")
 
 
 try:
     _update_constants_module()
-except NxLibException:
+except _NxLibError:
     pass
 except:
     pass
