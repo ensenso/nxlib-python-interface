@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .exception import NxLibException
+from .exception import NxLibException, NxLibError
 
 from ctypes import *
 

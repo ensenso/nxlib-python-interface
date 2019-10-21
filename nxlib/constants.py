@@ -1,5 +1,5 @@
 import json
-from nxlib import NxLibCommand, NxLibException
+from nxlib import NxLibCommand, NxLibException, NxLibError
 from .helper import convert_camel_to_upper_snake, fix_nxlib_prefix
 
 NXLIB_ITEM_SEPARATOR = '/'
@@ -792,7 +792,7 @@ def _update_constants_module():
                     globals()[variable_name] = value
     except:
         raise NxLibError("Could not load current nxlib constants. "
-                         "It may be that your nxlib version does not support updating.", "", "")
+                         "It may be that your nxlib version does not support updating.")
 
 
 try:

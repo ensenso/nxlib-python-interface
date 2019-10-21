@@ -1,5 +1,5 @@
 import json
-from nxlib import NxLibCommand, NxLibException
+from nxlib import NxLibCommand, NxLibError
 from .helper import convert_camel_to_upper_snake, fix_nxlib_prefix
 
 NXLIB_ITEM_SEPARATOR = '/'
