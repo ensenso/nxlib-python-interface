@@ -1,8 +1,8 @@
 import os
 import json
 
-from nxlib import NxLibCommand, NxLibException
-from nxlib.helper import fix_nxlib_prefix, convert_camel_to_upper_snake
+from ensenso_nxlib import NxLibCommand, NxLibException
+from ensenso_nxlib.helper import fix_nxlib_prefix, convert_camel_to_upper_snake
 
 from bin import file_appender as appender
 
@@ -14,7 +14,7 @@ CONSTANTS_PREFIX = {'Commands': 'cmd', 'Errors': 'err', 'Items': 'itm',
 
 
 def generate_constants_from_loaded_lib():
-    print("Generating nxlib constants...")
+    print("Generating ensenso_nxlib constants...")
     cmd = NxLibCommand("GetConstants")
     cmd.execute()
     result = cmd.result()
@@ -61,11 +61,11 @@ if __name__ == '__main__':
     current_directory = os.path.dirname(os.path.realpath(__file__))
     repo_directory = os.path.dirname(current_directory)
     output_name = "constants.py"
-    package_name = "nxlib"
+    package_name = "ensenso_nxlib"
 
     print("Writing constants module {} to package {}".format(output_name, package_name))
     appender.file_appender(['header_part.txt', 'constants_generated.py', 'execute_part.txt'],
                            current_directory,
                            output_name,
                            os.path.join(repo_directory + "/" + package_name, output_name))
-    print("Please install nxlib package now in order to make the new generated {} module available".format(output_name))
+    print("Please install ensenso_nxlib package now in order to make the new generated {} module available".format(output_name))

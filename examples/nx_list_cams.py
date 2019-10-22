@@ -1,6 +1,6 @@
-from nxlib import NxLibItem, NxLibException
-from nxlib.constants import *
-import nxlib.api as api
+from ensenso_nxlib import NxLibItem, NxLibException
+from ensenso_nxlib.constants import *
+import ensenso_nxlib.api as api
 
 
 def main():

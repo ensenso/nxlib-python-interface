@@ -1,8 +1,8 @@
 import pytest
 import os
 
-from nxlib import NxLibCommand, NxLibException
-from nxlib.constants import *
+from ensenso_nxlib import NxLibCommand, NxLibException
+from ensenso_nxlib.constants import *
 
 CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 test_camera = CURRENT_DIR + "/test_files/N35_test.zip"

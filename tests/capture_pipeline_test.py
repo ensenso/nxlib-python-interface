@@ -1,8 +1,8 @@
 import pytest
 import os
-from nxlib import NxLibItem, NxLibCommand
-import nxlib.api as api
-from nxlib.constants import *
+from ensenso_nxlib import NxLibItem, NxLibCommand
+import ensenso_nxlib.api as api
+from ensenso_nxlib.constants import *
 import numpy
 
 CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))

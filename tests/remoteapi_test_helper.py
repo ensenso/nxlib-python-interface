@@ -1,7 +1,7 @@
-from nxlib.item import NxLibItem
-from nxlib.constants import *
+from ensenso_nxlib.item import NxLibItem
+from ensenso_nxlib.constants import *
 
-import nxlib.api as nxlib
+import ensenso_nxlib.api as nxlib
 import sys
 
 import time

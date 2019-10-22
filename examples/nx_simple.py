@@ -1,6 +1,6 @@
-from nxlib import NxLibCommand, NxLibException, NxLibItem
-from nxlib.constants import *
-import nxlib.api as api
+from ensenso_nxlib import NxLibCommand, NxLibException, NxLibItem
+from ensenso_nxlib.constants import *
+import ensenso_nxlib.api as api
 
 import argparse
 import numpy

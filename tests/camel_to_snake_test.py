@@ -1,5 +1,5 @@
 import pytest
-from nxlib.helper import convert_camel_to_lower_snake, convert_camel_to_upper_snake, fix_nxlib_prefix
+from ensenso_nxlib.helper import convert_camel_to_lower_snake, convert_camel_to_upper_snake, fix_nxlib_prefix
 
 
 def test_camel_to_lower_snake():

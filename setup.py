@@ -5,8 +5,8 @@ this_directory = path.abspath(path.dirname(__file__))
 with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-setup(name='nxlib',
-      packages=['nxlib'],
+setup(name='ensenso_nxlib',
+      packages=['ensenso_nxlib'],
       python_requires='>3.5.0',
       version='0.1',
       description='Python interface to interact with the Ensenso NxLib',

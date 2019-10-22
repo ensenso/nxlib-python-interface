@@ -1,4 +1,4 @@
-import nxlib.api as nxlib
+import ensenso_nxlib.api as nxlib
 from .exception import NxLibError, NxLibException
 
 import numpy as np

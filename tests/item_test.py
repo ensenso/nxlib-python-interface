@@ -1,6 +1,6 @@
 import pytest
-from nxlib.constants import *
-from nxlib import NxLibItem
+from ensenso_nxlib.constants import *
+from ensenso_nxlib import NxLibItem
 
 
 def test_is_true():

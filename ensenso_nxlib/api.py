@@ -3,7 +3,7 @@ from .exception import NxLibException, NxLibError
 
 from ctypes import *
 
-import nxlib.helper as helper
+import ensenso_nxlib.helper as helper
 
 __all__ = [
     "close_tcp_port",

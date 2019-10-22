@@ -1,4 +1,4 @@
-import nxlib
+import ensenso_nxlib
 
 __all__ = [
     "NxLibError",
@@ -26,7 +26,7 @@ class NxLibException(NxLibError):
         return self._error_code
 
     def get_error_text(self):
-        return nxlib.api.translate_error_code(self._error_code)
+        return ensenso_nxlib.api.translate_error_code(self._error_code)
 
     def get_item_path(self):
         return self._path
@@ -36,7 +36,7 @@ class NxLibException(NxLibError):
 
         try:
             if self._path:
-                message += "\nCurrent item value: {}".format(nxlib.NxLibItem(self._path).as_json(True))
+                message += "\nCurrent item value: {}".format(ensenso_nxlib.NxLibItem(self._path).as_json(True))
         except NxLibError:
             pass
 

@@ -26,11 +26,11 @@ If you do not need to do any modifications in the installed packet space and onl
 
 Global installation (does need privileged rights).
 ```
-pip3 install nxlib
+pip3 install ensenso_nxlib
 ```
 Local installation.
 ```
-pip3 install --user nxlib
+pip3 install --user ensenso_nxlib
 ```
 
 #### Installing from Source
@@ -51,7 +51,7 @@ pip3 install -e .
 
 ## Overview
 
-The Python Interface nxlib consists of modules which implement the NxLib classes (NxLibItem, NxLibCommand, NxLibException) and modules which wrap the global NxLib-Functions.
+The Python Interface ensenso_nxlib consists of modules which implement the NxLib classes (NxLibItem, NxLibCommand, NxLibException) and modules which wrap the global NxLib-Functions.
 
 ### Global Functions and Constants
   * **api** - The module for accessing global functions.
@@ -66,12 +66,12 @@ The Python Interface nxlib consists of modules which implement the NxLib classes
 ### How to import the modules
 The constants or api module should be imported like this
 ```python
-import nxlib.api as api
-from nxlib.constants import *
+import ensenso_nxlib.api as api
+from ensenso_nxlib.constants import *
 ```
 Usually import * should be avoided. In this case however, it is unlikely that the constants defined here have the same name as other variables in your projects. Otherwise you will have to access them within a namespace like the following
 ```python
-import nxlib.constants as consts
+import ensenso_nxlib.constants as consts
 ```
 and call the corresponding constants with the defined namespace
 ```python
@@ -80,7 +80,7 @@ consts.ITM_NXLIB_CONSTANT
 
 Class modules can be easily imported like the following
 ```python
-from nxlib import NxLibItem, NxLibCommand, NxLibException
+from ensenso_nxlib import NxLibItem, NxLibCommand, NxLibException
 ```
 
 ## Differences to other Language APIs from EnsensoSDK
@@ -109,14 +109,14 @@ nxLibInitialize();
 ```
 will be the following in Python.
 ```python
-import nxlib.api as api
+import ensenso_nxlib.api as api
 api.initialize()
 ```
 We also stripped away the nxLib prefix of these static C++ or C functions, because the corresponding functions in Python are associated with an object.
 
 Of course, you could also do the following:
 ```python
-from nxlib.api import *
+from ensenso_nxlib.api import *
 initialize()
 ```
 That enables you to call the function within the global namespace in Python. This, however, is not recommended. It could overwrite other functions that have the same name in your program (which is likely for the name e.g. initialize)

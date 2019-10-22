@@ -2,14 +2,14 @@ import pytest
 import os
 import sys
 from subprocess import PIPE, Popen
-from nxlib.item import NxLibItem
-from nxlib.constants import *
+from ensenso_nxlib.item import NxLibItem
+from ensenso_nxlib.constants import *
 
 from tests.remoteapi_test_helper import tcp_port, host_name
 
 import time
 
-import nxlib.api as nxlib_remote
+import ensenso_nxlib.api as nxlib_remote
 
 CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 global helper_file

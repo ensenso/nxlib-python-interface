@@ -793,8 +793,8 @@ def _update_constants_module():
                         variable_name = _fix_nxlib_prefix(variable_name)
                     globals()[variable_name] = value
     except:
-        raise _NxLibError("Could not load current nxlib constants. "
-                          "It may be that your nxlib version does not support updating.")
+        raise _NxLibError("Could not load current ensenso_nxlib constants. "
+                          "It may be that your ensenso_nxlib version does not support updating.")
 
 
 try:

@@ -1,12 +1,12 @@
 import pytest
 
-import nxlib
-from nxlib import NxLibException
+import ensenso_nxlib
+from ensenso_nxlib import NxLibException
 
 
 def test_exception_message():
-    error_code = nxlib.constants.NXLIB_ITEM_TYPE_NOT_COMPATIBLE
-    error_text = nxlib.api.translate_error_code(error_code)
+    error_code = ensenso_nxlib.constants.NXLIB_ITEM_TYPE_NOT_COMPATIBLE
+    error_text = ensenso_nxlib.api.translate_error_code(error_code)
     dummy_path = "/dummy_path"
 
     exception = None
