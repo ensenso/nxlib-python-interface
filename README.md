@@ -36,7 +36,7 @@ pip3 install --user nxlib
 #### Installing from Source
 If you like to install from source, e.g. to make local changes of the installed package on your system, you will first have to clone the repository
 ```
-git clone https://git.ensenso.de/pub/nxlib-python-interface.git
+git clone https://github.com/ensenso/nxlib-python-interface.git
 ```
 and install it from the root of the cloned repository (where the [setup.py](setup.py) - file is located).
 ```
