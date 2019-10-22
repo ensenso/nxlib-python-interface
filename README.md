@@ -21,7 +21,7 @@ This package is only needed, if you want to run the tests in the ./tests folder:
 
 There are two ways of installing the package. Either directly from source, or via pip repositories.
 
-#### ~~Installing with Pip Repository~~ (This does not work yet, please continue with the installation from source.)
+#### Installing with Pip Repository
 If you do not need to do any modifications in the installed packet space and only want to use the package as is, we recommend you to install the package with pip. Pip will handle all dependencies of the package and will download the latest package version from here.
 
 Global installation (does need privileged rights).
