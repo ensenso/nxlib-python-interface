@@ -146,7 +146,7 @@ python3 sole_test.py
 
 ## Versioning
 
-We use [Semantic Versioning](http://semver.org/). For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We use [Semantic Versioning](http://semver.org/). For the versions available, see the [tags on this repository](https://github.com/ensenso/nxlib-python-interface/tags). 
 
 ## Authors
 
