@@ -1,6 +1,6 @@
 # NxLib Python Interface
 
-This package is the Python interface from the [Ensenso](https://www.ensenso.com/) GmbH, to access functionalities of the NxLib via Python. With the Interface you can access your installed version of the NxLib from the [EnsensoSDK](https://www.ensenso.com/support/sdk-download/?lang=en) and use it with Python.
+This package is the Python interface from the [Ensenso](https://www.ensenso.com/) GmbH, to access functionalities of the NxLib via Python. With the Interface you can access your installed version of the NxLib from the [EnsensoSDK](https://www.ensenso.com/support/sdk-download/?lang=en) and use it with Python. Beware this project is currently in beta phase and some functionalities do not work yet.
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ This package is only needed, if you want to run the tests in the ./tests folder:
 
 There are two ways of installing the package. Either directly from source, or via pip repositories.
 
-#### Installing with Pip Repository
+#### ~~Installing with Pip Repository~~ (This does not work yet, please continue with the installation from source.)
 If you do not need to do any modifications in the installed packet space and only want to use the package as is, we recommend you to install the package with pip. Pip will handle all dependencies of the package and will download the latest package version from here.
 
 Global installation (does need privileged rights).

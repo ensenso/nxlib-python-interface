@@ -13,7 +13,7 @@ setup(name='nxlib',
       long_description=long_description,
       long_description_content_type='text/markdown',
       classifiers=[
-          'Development Status :: 3 - Beta',
+          'Development Status :: 4 - Beta',
           'License :: OSI Approved :: MIT License',
           'Programming Language :: Python :: 3'
       ],
