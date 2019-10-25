@@ -163,19 +163,16 @@ class NxLibItem:
             self.path, buffer, mat.shape[1], mat.shape[0], channel_count, bpe, is_float)
         self._check_return_code(error_code)
 
-    def get_binary_data(self, buffer_size=0):
-        if buffer_size == 0:
-            buffer = self.create_buffer()
-            buffer_size = buffer.shape[0] * buffer.shape[1] * buffer.shape[2] * buffer.dtype.itemsize
-            cbuffer = np.ctypeslib.as_ctypes(buffer)
-        else:
-            cbuffer = []  # ?? to test # TODO
+    def get_binary_data(self):
+        buffer = self._create_buffer()
+        buffer_size = buffer.shape[0] * buffer.shape[1] * buffer.shape[2] * buffer.dtype.itemsize
+        cbuffer = np.ctypeslib.as_ctypes(buffer)
         _, _, error_code = nxlib.get_binary(
             self.path, cbuffer, buffer_size)
         self._check_return_code(error_code)
         return buffer
 
-    def create_buffer(self):
+    def _create_buffer(self):
         width, height, channel_count, bpe, is_float, _, _ = self.get_binary_data_info()
         nptype = np.uint8
         if is_float:
