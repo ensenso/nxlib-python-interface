@@ -44,7 +44,7 @@ class NxLibItem:
     def __setitem__(self, path, value):
         self[path].set_t(value)
 
-    def compare(self, value):
+    def _compare(self, value):
         item_value = self.as_t()
         if type(item_value) == type(value):
             if item_value == value:
@@ -57,22 +57,22 @@ class NxLibItem:
             raise NxLibException(self.path, NXLIB_ITEM_TYPE_NOT_COMPATIBLE)
 
     def __lt__(self, value):
-        return self.compare(value) < 0
+        return self._compare(value) < 0
 
     def __le__(self, value):
-        return self.compare(value) <= 0
+        return self._compare(value) <= 0
 
     def __eq__(self, value):
-        return self.compare(value) == 0
+        return self._compare(value) == 0
 
     def __ne__(self, value):
-        return self.compare(value) != 0
+        return self._compare(value) != 0
 
     def __gt__(self, value):
-        return self.compare(value) > 0
+        return self._compare(value) > 0
 
     def __ge__(self, value):
-        return self.compare(value) >= 0
+        return self._compare(value) >= 0
 
     def __lshift__(self, other):
         if type(other) is str:
