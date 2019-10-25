@@ -87,14 +87,15 @@ class NxLibItem:
             self.set_null()
         elif type(value) is int:
             if (value > 2147483647 or value < -2147483648):
-                self.set_double(value)
+                raise NotImplementedError()
             else:
                 self.set_int(value)
         elif type(value) is str:
             self.set_string(value)
         elif type(value) is bool:
             self.set_bool(value)
-        # TODO: double is missing?
+        elif type(value) is float:
+            self.set_double(value)
         else:
             raise NxLibException(self.path, NXLIB_ITEM_TYPE_NOT_COMPATIBLE)
 
