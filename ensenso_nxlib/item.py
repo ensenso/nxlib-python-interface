@@ -320,6 +320,8 @@ class NxLibItem:
                 self.path, value, wait_for_equal)
         elif type(value) is bool:
             error_code = nxlib.wait_for_bool_value(self.path, value, wait_for_equal)
+        elif type(value) is float:
+            error_code = nxlib.wait_for_double_value(self.path, value, wait_for_equal)
         self._check_return_code(error_code)
 
     def make_unique_item(self, item_name=None):
