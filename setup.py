@@ -24,6 +24,13 @@ setup(name='ensenso_nxlib',
       install_requires=[
           'numpy'
       ],
-      setup_requires=['pytest-runner', 'flake8', 'pep8-naming'],
       tests_require=['pytest'],
-      zip_safe=False)
+      zip_safe=False,
+      extras_require={
+          'dev': [
+              'pytest-runner',
+              'flake8',
+              'pep8-naming'
+          ]
+      }
+      )
