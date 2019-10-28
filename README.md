@@ -26,11 +26,11 @@ If you do not need to do any modifications in the installed packet space and onl
 
 Global installation (does need privileged rights).
 ```
-pip3 install ensenso_nxlib
+pip install ensenso_nxlib
 ```
 Local installation.
 ```
-pip3 install --user ensenso_nxlib
+pip install --user ensenso_nxlib
 ```
 
 #### Installing from Source
@@ -41,13 +41,15 @@ git clone https://github.com/ensenso/nxlib-python-interface.git
 and install it from the root of the cloned repository (where the [setup.py](setup.py) - file is located).
 ```
 cd nxlib-python-interface
-pip3 install .
+pip install .
 ```
 
 If you like to do changes to your local installation (development version), install it with
 ```
-pip3 install -e .
+pip install -e .[dev]
 ```
+You will need extra packages defined under [setup.py](setup.py) in the extra_require dictionary, which pip will install for you.
+
 
 ## Overview
 
@@ -146,7 +148,8 @@ python3 sole_test.py
 
 ## Versioning
 
-We use [Semantic Versioning](http://semver.org/). For the versions available, see the [tags on this repository](https://github.com/ensenso/nxlib-python-interface/tags). 
+For released versions, see the [tags on this repository](https://github.com/ensenso/nxlib-python-interface/tags). We use Major.Minor version numbers.
+Sometimes there are also post releases. Post released means that the source code has not been changed, but the documentation, for example, has been changed.
 
 ## Authors
 

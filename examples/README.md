@@ -29,10 +29,10 @@ where _-s_ is the argument specifier and _abc_ the corresponding value of the ar
 
 **Install open3d with pip** - In Order to use the example **nx_watch_point_cloud.py**, you will have to install open3d with
 ```bash
-pip3 install open3d-python
+pip install open3d-python
 ```
 or (if no sufficient privileges)
 ```bash
-pip3 install --user open3d-python
+pip install --user open3d-python
 ```
 
