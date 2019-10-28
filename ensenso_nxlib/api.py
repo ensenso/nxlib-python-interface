@@ -450,7 +450,7 @@ def get_debug_buffer():
 
 def initialize(wait_for_initial_camera_refresh=True):
     if _lib_is_remote():
-        raise Exception("Library is a remote nxlib. Only normal nxlib instances can use initialize.")
+        raise NxLibError("Library is a remote nxlib. Only normal nxlib instances can use initialize.")
     f = _get_lib().nxLibInitialize
     return_code = c_int32()
     f.argtypes = [POINTER(c_int32), c_int32]
@@ -460,7 +460,7 @@ def initialize(wait_for_initial_camera_refresh=True):
 
 def finalize():
     if _lib_is_remote():
-        raise Exception("Library is a remote nxlib. Only normal nxlib instances can use finalize.")
+        raise NxLibError("Library is a remote nxlib. Only normal nxlib instances can use finalize.")
     f = _get_lib().nxLibFinalize
     return_code = c_int32()
     f.argtypes = [POINTER(c_int32)]
@@ -470,7 +470,7 @@ def finalize():
 
 def open_tcp_port(port_number=0, opened_port=0):
     if _lib_is_remote():
-        raise Exception("Library is a remote nxlib. Only normal nxlib instances are allowed to open tcp ports.")
+        raise NxLibError("Library is a remote nxlib. Only normal nxlib instances are allowed to open tcp ports.")
     f = _get_lib().nxLibOpenTcpPort
     return_code = c_int32()
     f.argtypes = [POINTER(c_int32), c_int32, c_int32]
@@ -482,7 +482,7 @@ def open_tcp_port(port_number=0, opened_port=0):
 
 def close_tcp_port():
     if _lib_is_remote():
-        raise Exception("Library is a remote nxlib. Only normal nxlib instances are allowed to close tcp ports.")
+        raise NxLibError("Library is a remote NxLib. Only normal NxLib instances are allowed to close tcp ports.")
     f = _get_lib().nxLibCloseTcpPort
     return_code = c_int32()
     f.argtypes = [POINTER(c_int32)]
@@ -492,7 +492,7 @@ def close_tcp_port():
 
 def connect(hostname, port):
     if not _lib_is_remote():
-        raise Exception("Cannot use connect function from a not remote NxLib.")
+        raise NxLibError("Cannot use connect function from a normal NxLib.")
     hostname = helper.fix_string_encoding(hostname)
     return_code = c_int32(0)
     f = _get_lib().nxLibConnect
@@ -503,7 +503,7 @@ def connect(hostname, port):
 
 def disconnect():
     if not _lib_is_remote():
-        raise Exception("Cannot use disconnenct function from a not remote NxLib.")
+        raise NxLibError("Cannot use disconnenct function from a normal NxLib.")
     f = _get_lib().nxLibDisconnect
     return_code = c_int32(0)
     f.argtypes = [POINTER(c_int32)]
