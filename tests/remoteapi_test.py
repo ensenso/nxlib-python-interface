@@ -24,7 +24,7 @@ def nxlib_pid():
     nxlib_procc = Popen(['python3', '-u', helper_file], stdin=PIPE, stdout=PIPE,
                         universal_newlines=True, bufsize=1)
 
-    time.sleep(10)  # wait for 10 secs, to make sure the lib is loaded successfully
+    time.sleep(20)  # wait for 10 secs, to make sure the lib is loaded successfully
     assert nxlib_procc is not None, "Could not start nxlib subprocess"
     return nxlib_procc
 
@@ -39,8 +39,8 @@ def open_nxview():
     time.sleep(10)  # wait for nxview
     return nxview_procc
 
-
-def test_remoteapi(open_nxview):
+'''
+def _test_remoteapi(open_nxview):
     assert open_nxview.pid is not None
     nxlib_remote.load_remote_lib()
 
@@ -52,6 +52,7 @@ def test_remoteapi(open_nxview):
     # Kill the subprocess
     time.sleep(1)
     open_nxview.kill()
+'''
 
 
 def _test_set_and_get_string():
