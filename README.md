@@ -1,4 +1,4 @@
-# NxLib Python Interface
+# NxLib Python Interface [![Build Status](https://travis-ci.org/ensenso/nxlib-python-interface.svg?branch=master)](https://travis-ci.org/ensenso/nxlib-python-interface)
 
 This package is the Python interface from the [Ensenso](https://www.ensenso.com/) GmbH, to access functionalities of the NxLib via Python. With the Interface you can access your installed version of the NxLib from the [EnsensoSDK](https://www.ensenso.com/support/sdk-download/?lang=en) and use it with Python. Beware this project is currently in beta phase and some functionalities do not work yet.
 

@@ -1,0 +1,33 @@
+language: python
+sudo: required
+dist: bionic
+python:
+  - "3.5"
+  - "3.6"
+  - "3.7"
+  - "3.8"
+  - "3.8-dev"  # 3.8 development branch
+  - "nightly"  # nightly build
+
+env:
+  global:
+    - ENSENSO_INSTALL=/opt/ensenso
+
+before_install:
+  - sudo apt update
+
+  # Install dependencies of SDK
+  - sudo apt install libglu1
+
+  # Install the current EnsensoSDK
+  - sudo apt -y install wget
+  - wget -O /tmp/ensenso.deb https://download.ensenso.com/s/ensensosdk/download?files=ensenso-sdk-2.3.978-x64.deb
+  - sudo dpkg -i /tmp/ensenso.deb
+  - sudo apt install -f -y
+
+install:
+  # Install this package
+  - pip install .
+
+script:
+  - pytest
