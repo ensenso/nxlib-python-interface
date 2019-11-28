@@ -5,7 +5,7 @@ This package is the Python interface from the [Ensenso](https://www.ensenso.com/
 ## Prerequisites
 
 In Order to use this package you will need the following Prerequisites installed:
-  * [EnsensoSDK](https://www.ensenso.com/support/sdk-download/?lang=en) - Official SDK of the [Ensenso](https://www.ensenso.com/) Group for developing software with stereo 3D cameras for industrial applications.
+  * [EnsensoSDK](https://www.ensenso.com/support/sdk-download/?lang=en) - Official SDK of the [Ensenso](https://www.ensenso.com/) Group for developing software with stereo 3D cameras for industrial applications. Versions >= 2.3. are recommended.
   * [Python](https://www.python.org/downloads/) - Version > 3.5. is required.
   * [Pip](https://pip.pypa.io/en/stable/installing/) - A Python package manager. Version > 9.0.1 is required.
 
