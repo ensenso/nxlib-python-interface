@@ -76,7 +76,7 @@ class NxLibItem:
 
     def __lshift__(self, other):
         if type(other) is str:
-            self.set_json(str, True)
+            self.set_json(other, True)
         elif isinstance(other, NxLibItem):
             self.set_json(other.as_json(), True)
         else:
