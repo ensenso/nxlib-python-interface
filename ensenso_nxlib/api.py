@@ -83,13 +83,23 @@ class _Nxlib():
         self.is_remote = False
         self.lib_object = None
 
+    def reset(self):
+        if self.lib_object is None:
+            return
+
+        try:
+            if self.is_remote:
+                disconnect()
+            else:
+                finalize()
+        except NxLibException:
+            pass
+
+        del self.lib_object
+        self.lib_object = None
+
     def __del__(self):
-        if self.is_remote:
-            disconnect()
-        else:
-            finalize()
-        if self.lib_object:
-            del self.lib_object
+        self.reset()
 
 
 # testing flag
@@ -123,6 +133,9 @@ def _lib_is_remote():
 
 def load_lib(path=None):
     global _nxlib
+
+    _nxlib.reset()
+
     if path is None:
         _nxlib.lib_object = CDLL(helper.get_lib_name())
     else:
@@ -134,6 +147,9 @@ def load_lib(path=None):
 
 def load_remote_lib(path=None):
     global _nxlib
+
+    _nxlib.reset()
+
     if path is None:
         _nxlib.lib_object = CDLL(helper.get_lib_name(True))
     else:
