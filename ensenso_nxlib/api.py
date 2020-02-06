@@ -2,6 +2,8 @@
 from .exception import NxLibException, NxLibError
 
 from ctypes import *
+import _ctypes
+import os
 
 import ensenso_nxlib.helper as helper
 
@@ -93,25 +95,43 @@ class _Nxlib():
             else:
                 finalize()
         except NxLibException:
+            # Ignore any errors while finalizing the NxLib. We will unload the library anyway.
             pass
+
+        # ctypes does not unload the library even when the CDLL object gets garbage collected,
+        # so we unload it manually.
+        if os.name == "posix":
+            _ctypes.dlclose(self.lib_object._handle)
+        elif os.name == "nt":
+            _ctypes.FreeLibrary(self.lib_object._handle)
 
         del self.lib_object
         self.lib_object = None
 
     def __del__(self):
-        self.reset()
+        try:
+            self.reset()
+        except:
+            # Sometimes we cannot clean up the library when unloading the module, because some
+            # things that are needed for the destruction are already unloaded. Ignore any errors
+            # this might cause.
+            pass
 
 
 # testing flag
 __nx_testing__ = False
 
 # global placeholder for the nxlib_instance
-_nxlib = _Nxlib()
+_nxlib = None
 
 
 def _get_lib():
     # will default load the normal nxlib, if there has been no load_remote_lib beforehand!
     global _nxlib
+
+    if _nxlib is None:
+        _nxlib = _Nxlib()
+
     if _nxlib.lib_object is None:
         if _nxlib.is_remote:
             load_remote_lib()
@@ -123,11 +143,8 @@ def _get_lib():
 def is_current_lib_remote():
     # For Testing and debug purpose
     global _nxlib
-    return _nxlib.is_remote
-
-
-def _lib_is_remote():
-    global _nxlib
+    if _nxlib is None:
+        return False
     return _nxlib.is_remote
 
 
@@ -465,7 +482,7 @@ def get_debug_buffer():
 
 
 def initialize(wait_for_initial_camera_refresh=True):
-    if _lib_is_remote():
+    if is_current_lib_remote():
         raise NxLibError("Library is a remote nxlib. Only normal nxlib instances can use initialize.")
     f = _get_lib().nxLibInitialize
     return_code = c_int32()
@@ -475,7 +492,10 @@ def initialize(wait_for_initial_camera_refresh=True):
 
 
 def finalize():
-    if _lib_is_remote():
+    if _nxlib is None or _nxlib.lib_object is None:
+        return
+
+    if is_current_lib_remote():
         raise NxLibError("Library is a remote nxlib. Only normal nxlib instances can use finalize.")
     f = _get_lib().nxLibFinalize
     return_code = c_int32()
@@ -485,7 +505,7 @@ def finalize():
 
 
 def open_tcp_port(port_number=0, opened_port=0):
-    if _lib_is_remote():
+    if is_current_lib_remote():
         raise NxLibError("Library is a remote nxlib. Only normal nxlib instances are allowed to open tcp ports.")
     f = _get_lib().nxLibOpenTcpPort
     return_code = c_int32()
@@ -497,7 +517,7 @@ def open_tcp_port(port_number=0, opened_port=0):
 
 
 def close_tcp_port():
-    if _lib_is_remote():
+    if is_current_lib_remote():
         raise NxLibError("Library is a remote NxLib. Only normal NxLib instances are allowed to close tcp ports.")
     f = _get_lib().nxLibCloseTcpPort
     return_code = c_int32()
@@ -507,7 +527,7 @@ def close_tcp_port():
 
 
 def connect(hostname, port):
-    if not _lib_is_remote():
+    if not is_current_lib_remote():
         raise NxLibError("Cannot use connect function from a normal NxLib.")
     hostname = helper.fix_string_encoding(hostname)
     return_code = c_int32(0)
@@ -518,7 +538,7 @@ def connect(hostname, port):
 
 
 def disconnect():
-    if not _lib_is_remote():
+    if not is_current_lib_remote():
         raise NxLibError("Cannot use disconnenct function from a normal NxLib.")
     f = _get_lib().nxLibDisconnect
     return_code = c_int32(0)
