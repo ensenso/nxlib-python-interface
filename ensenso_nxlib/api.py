@@ -151,6 +151,9 @@ def is_current_lib_remote():
 def load_lib(path=None):
     global _nxlib
 
+    if _nxlib is None:
+        _nxlib = _Nxlib()
+
     _nxlib.reset()
 
     if path is None:
@@ -164,6 +167,9 @@ def load_lib(path=None):
 
 def load_remote_lib(path=None):
     global _nxlib
+
+    if _nxlib is None:
+        _nxlib = _Nxlib()
 
     _nxlib.reset()
 
