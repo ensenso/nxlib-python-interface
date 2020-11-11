@@ -1,11 +1,33 @@
 language: python
 sudo: required
 dist: bionic
-python:
-  - "3.5"
-  - "3.6"
-  - "3.7"
-  - "3.8"
+
+matrix:
+  include:
+    - name: "3.5 sdk 3.0.275"
+      python: "3.5"
+      env: SDK_VERSION=3.0.275
+    - name: "3.6 sdk 3.0.275"
+      python: "3.6"
+      env: SDK_VERSION=3.0.275
+    - name: "3.7 sdk 3.0.275"
+      python: "3.7"
+      env: SDK_VERSION=3.0.275
+    - name: "3.8 sdk 3.0.275"
+      python: "3.8"
+      env: SDK_VERSION=3.0.275
+    - name: "3.5 sdk 2.3.1536"
+      python: "3.5"
+      env: SDK_VERSION=2.3.1536
+    - name: "3.6 sdk 2.3.1536"
+      python: "3.6"
+      env: SDK_VERSION=2.3.1536
+    - name: "3.7 sdk 2.3.1536"
+      python: "3.7"
+      env: SDK_VERSION=2.3.1536
+    - name: "3.8 sdk 2.3.1536"
+      python: "3.8"
+      env: SDK_VERSION=2.3.1536
 
 env:
   global:
@@ -19,7 +41,7 @@ before_install:
 
   # Install the current EnsensoSDK
   - sudo apt -y install wget
-  - wget -O /tmp/ensenso.deb https://download.ensenso.com/s/ensensosdk/download?files=ensenso-sdk-2.3.978-x64.deb
+  - wget -O /tmp/ensenso.deb https://download.ensenso.com/s/ensensosdk/download?files=ensenso-sdk-$SDK_VERSION-x64.deb
   - sudo dpkg -i /tmp/ensenso.deb
   - sudo apt install -f -y
 
