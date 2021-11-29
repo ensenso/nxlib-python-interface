@@ -28,7 +28,7 @@ def compute_average_z(point_map):
     for i in range(point_map.shape[0]):
         point = point_map[i]
         z_value = point[2]
-        z_average = z_value
+        z_average += z_value
         z_count += 1
 
     if z_count != 0:
