@@ -33,7 +33,7 @@ def _get_architecture_bits():
 def get_lib_name(is_remote_lib=False):
     if is_remote_lib:
         default_lib_names = {"win32bit": "NxLibRemote32.dll",
-                             "win64bit": "NxLibRemote32.dll",
+                             "win64bit": "NxLibRemote64.dll",
                              "linux32bit": "libNxLibRemote32.so",
                              "linux64bit": "libNxLibRemote64.so"}
     else:
