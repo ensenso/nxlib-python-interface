@@ -1,5 +1,7 @@
 ### ⚠️ This repository is deprecated. The NxLib Python interface gets installed with the Ensenso SDK since version 3.3 and is also released on [PyPI](https://pypi.org/project/nxlib/). See [the Ensenso SDK manual](https://www.ensenso.com/manual/python-api) for more information.
 
+### If you encounter any issues or if you have questions regarding the NxLib Python interface please contact the [IDS support](https://en.ids-imaging.com/support.html).
+
 # NxLib Python Interface [![Build Status](https://travis-ci.org/ensenso/nxlib-python-interface.svg?branch=master)](https://travis-ci.org/ensenso/nxlib-python-interface)
 
 This package is the Python interface from the [Ensenso](https://www.ensenso.com/) GmbH, to access functionalities of the NxLib via Python. With the Interface you can access your installed version of the NxLib from the [EnsensoSDK](https://www.ensenso.com/support/sdk-download/?lang=en) and use it with Python. Beware this project is currently in beta phase and some functionalities do not work yet.
@@ -131,7 +133,7 @@ Other than that, you can use the Python API like the other APIs described in the
 
 ## Examples
 
-Some examples are provided in the [examples](./examples) subfolder of this project. 
+Some examples are provided in the [examples](./examples) subfolder of this project.
 If you like to execute them, clone this repository and execute the individual examples in that subfolder.
 For further information see the [README.md](examples/README.md) within the examples subfolder of this project.
 
